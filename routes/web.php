@@ -13,17 +13,22 @@ Route::get('/', function () {
         // Add more clients as needed
     ];
     $stats = [
-        ['label' => 'Clients', 'value' => 150, 'text_color' => 'text-blue-600', 'dark_text_color' => 'text-blue-400'],
-        ['label' => 'Projects', 'value' => 320, 'text_color' => 'text-green-600', 'dark_text_color' => 'text-green-400'],
-        ['label' => 'Employees', 'value' => 75, 'text_color' => 'text-purple-600', 'dark_text_color' => 'text-purple-400'],
-        ['label' => 'Awards', 'value' => 25, 'text_color' => 'text-yellow-600', 'dark_text_color' => 'text-yellow-400'],
-        ['label' => 'Partners', 'value' => 40, 'text_color' => 'text-teal-600', 'dark_text_color' => 'text-teal-400'],
+        ['label' => 'Happy Clients', 'value' => 150],
+        ['label' => 'Completed Projects', 'value' => 320],
+        ['label' => 'Employees', 'value' => 75],
+        ['label' => 'Awards', 'value' => 25],
+        ['label' => 'Partners', 'value' => 40],
     ];
 
     $blogs = DB::table('blogs')->latest()->take(7)->get();
 
     return view('pages.home', compact('clients', 'stats', 'blogs'));
 });
+
+Route::get('/experts', function () {
+    $experts = DB::table('experts')->get();
+    return view('pages.experts', compact('experts'));
+})->name('experts');
 
 Route::get('/contact', function () {
     return view('pages.contact');
@@ -50,6 +55,7 @@ Route::get('/blogs/{slug}', function ($slug) {
     $recentBlogs = DB::table('blogs')->latest()->take(5)->get();
     return view('pages.blog-detail', compact('blog', 'recentBlogs'));
 })->name('blog.show');
+
 
 
 // =============================================================================
