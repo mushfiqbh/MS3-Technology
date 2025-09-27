@@ -23,7 +23,7 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('/about/team') }}">Team</a></li>
+                            <li><a class="dropdown-item" href="{{ url('/experts') }}">Team</a></li>
                             <li><a class="dropdown-item" href="{{ url('/activities') }}">Activity</a></li>
                             <li><a class="dropdown-item" href="{{ url('/technology') }}">Technology</a></li>
                             <li><a class="dropdown-item" href="{{ url('/partners') }}">Partners</a></li>
@@ -139,11 +139,11 @@
                             <path fill-rule="evenodd"
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                 clip-rule="evenodd" />
-                        </svg>
+                        </svg>  
                     </button>
                     <ul class="mobile-dropdown-menu hidden mt-2 ml-4 space-y-1">
                         <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/about/team') }}">Team</a></li>
+                                href="{{ url('/experts') }}">Team</a></li>
                         <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
                                 href="{{ url('/activities') }}">Activity</a></li>
                         <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"

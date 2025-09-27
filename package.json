@@ -2,6 +2,12 @@
     "$schema": "https://json.schemastore.org/package.json",
     "private": true,
     "type": "module",
+    "version": "1.0.0",
+    "author": {
+        "name": "MS3 Technology",
+        "email": "ms3technology@gmail.com"
+    },
+    "license": "MIT",
     "scripts": {
         "build": "vite build",
         "dev": "vite"

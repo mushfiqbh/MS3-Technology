@@ -7,13 +7,13 @@
             <div class="lg:col-span-1">
                 <div class="flex items-center mb-6">
                     <i class="fas fa-code text-blue-500 text-2xl mr-3"></i>
-                    <span class="text-xl font-bold">IT Lab Solutions</span>
+                    <span class="text-xl font-bold">MS3 Technology BD</span>
                 </div>
                 <p class="text-gray-400 mb-6 leading-relaxed">
-                    Leading IT company in Bangladesh, transforming businesses through innovative technology solutions since 2011.
+                    Leading IT company in Bangladesh, transforming businesses through innovative technology solutions since 2017.
                 </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors">
+                    <a href="https://facebook.com/" class="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <a href="#" class="w-10 h-10 bg-blue-400 hover:bg-blue-500 rounded-full flex items-center justify-center transition-colors">
@@ -47,7 +47,7 @@
                     <li><a href="{{ url('/about') }}" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
                     <li><a href="{{ url('/activities') }}" class="text-gray-400 hover:text-white transition-colors">Activities</a></li>
                     <li><a href="{{ url('/careers') }}" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="{{ url('/blog') }}" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="{{ url('/blogs ') }}" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                     <li><a href="{{ url('/contact') }}" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                 </ul>
             </div>
@@ -59,16 +59,16 @@
                     <div class="flex items-start space-x-3">
                         <i class="fas fa-map-marker-alt text-blue-500 mt-1"></i>
                         <div>
-                            <p class="text-gray-400">Dhaka, Bangladesh</p>
+                            <p class="text-gray-400">Sylhet, Bangladesh</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-phone text-blue-500"></i>
-                        <p class="text-gray-400">+880 1XXX-XXXXXX</p>
+                        <p class="text-gray-400">+880 1744-221385</p>
                     </div>
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-envelope text-blue-500"></i>
-                        <p class="text-gray-400">info@ms3technology.com</p>
+                        <p class="text-gray-400">ms3technology@gmail.com</p>
                     </div>
                 </div>
 
