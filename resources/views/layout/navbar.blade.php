@@ -1,8 +1,8 @@
 <nav
-    class="lg:px-20 w-full min-h-[5rem] bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg sticky top-0 z-50 transition-colors duration-300">
+    class="sticky top-0 z-50 lg:px-20 w-full min-h-[5rem] dark:bg-gray-900/80 backdrop-blur-md shadow-lg transition-colors duration-300">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
-            <a class="flex items-center font-bold text-blue-600 text-lg flex-shrink-0" href="{{ url('/') }}">
+            <a class="flex items-center font-bold text-gray-800 text-lg flex-shrink-0" href="{{ url('/') }}">
                 MS3 Technology BD
             </a>
 
@@ -27,25 +27,6 @@
                             <li><a class="dropdown-item" href="{{ url('/activities') }}">Activity</a></li>
                             <li><a class="dropdown-item" href="{{ url('/technology') }}">Technology</a></li>
                             <li><a class="dropdown-item" href="{{ url('/partners') }}">Partners</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="relative group">
-                        <a class="nav-link flex items-center cursor-pointer">
-                            Products
-                            <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
-                                viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('/services/web-development') }}">Web
-                                    Development</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/services/mobile-apps') }}">Mobile Apps</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/services/cloud-solutions') }}">Cloud
-                                    Solutions</a></li>
                         </ul>
                     </li>
 

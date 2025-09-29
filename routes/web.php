@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     $clients = [
@@ -20,9 +22,7 @@ Route::get('/', function () {
         ['label' => 'Partners', 'value' => 40],
     ];
 
-    $blogs = DB::table('blogs')->latest()->take(7)->get();
-
-    return view('pages.home', compact('clients', 'stats', 'blogs'));
+    return view('pages.home', compact('clients', 'stats'));
 });
 
 Route::get('/experts', function () {
@@ -34,36 +34,13 @@ Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
 
-Route::get('/blogs', function () {
-    $category = request('category');
-    $query = DB::table('blogs')->latest();
-    if ($category) {
-        $query->where('category', $category);
-    }
-    $blogs = $query->paginate(8);
-    $categories = DB::table('blogs')->pluck('category')->unique();
-
-    return view('pages.blogs', compact('blogs', 'categories'));
-})->name('blog.index');
-
-
-Route::get('/blogs/{slug}', function ($slug) {
-    $blog = DB::table('blogs')->where('slug', $slug)->first();
-    if (!$blog) {
-        abort(404);
-    }
-    $recentBlogs = DB::table('blogs')->latest()->take(5)->get();
-    return view('pages.blog-detail', compact('blog', 'recentBlogs'));
-})->name('blog.show');
-
-
 
 // =============================================================================
 // PUBLIC ROUTES
 // =============================================================================
 
 // Home Page
-// Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [HomeController::class, '])->name('home');
 
 // Public Pages
 // Route::controller(PublicPageController::class)->group(function () {
@@ -72,7 +49,7 @@ Route::get('/blogs/{slug}', function ($slug) {
 //     Route::get('/gallery', 'gallery')->name('gallery');
 //     Route::get('/features', 'features')->name('features');
 //     Route::get('/customers', 'customers')->name('customers');
-//     Route::get('/news', 'news')->name('news.index');
+//     Route::get('/news', 'news')->name('news');
 //     Route::get('/news/{slug}', 'showNews')->name('news.show');
 // });
 
@@ -82,15 +59,15 @@ Route::get('/blogs/{slug}', function ($slug) {
 // AUTHENTICATION ROUTES
 // =============================================================================
 
-// Route::controller(AuthController::class)->group(function () {
-//     // Login Routes
-//     Route::get('/login', 'redirectToAdminLogin')->name('login'); // Laravel auth system compatibility
-//     Route::get('/admin/login', 'showLoginForm')->name('admin.login');
-//     Route::post('/admin/login', 'login')->name('admin.login.submit');
+Route::controller(AuthController::class)->group(function () {
+    // Login Routes
+    Route::get('/login', 'redirectToAdminLogin')->name('login'); // Laravel auth system compatibility
+    Route::get('/admin/login', 'showLoginForm')->name('admin.login');
+    Route::post('/admin/login', 'login')->name('admin.login.submit');
 
-//     // Logout Route
-//     Route::post('/admin/logout', 'logout')->name('admin.logout');
-// });
+    // Logout Route
+    Route::post('/admin/logout', 'logout')->name('admin.logout');
+});
 
 
 
@@ -98,21 +75,60 @@ Route::get('/blogs/{slug}', function ($slug) {
 // ADMIN ROUTES (Protected)
 // =============================================================================
 
-// Route::prefix('admin')
-//     ->name('admin.')
-//     ->middleware(['auth'])
-//     ->controller(AdminController::class)
-//     ->group(function () {
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->controller(AdminController::class)
+    ->group(function () {
 
-//         // Dashboard
-//         Route::get('/', 'index')->name('index');
+        // Dashboard
+        Route::get('/dashboard', 'index')->name('dashboard');
 
-//         // Gallery Management
-//         Route::get('/galleries', 'galleries')->name('galleries'); // Direct route for backward compatibility
-//         Route::prefix('galleries')->name('galleries.')->group(function () {
-//             Route::post('/', 'storeGallery')->name('store');
-//             Route::delete('/{id}', 'deleteGallery')->name('delete');
-//         });
+        // Experts Management
+        Route::get('/experts', 'experts')->name('experts.index');
+        Route::prefix('experts')->name('experts.')->group(function () {
+            Route::post('/', 'createExpert')->name('create');
+            Route::put('/{id}', 'updateExpert')->name('update');
+            Route::delete('/{id}', 'deleteExpert')->name('delete');
+        });
 
-       
-//     });
+        // Careers Management
+        Route::get('/careers', 'careers')->name('careers.index');
+        Route::prefix('careers')->name('careers.')->group(function () {
+            Route::post('/', 'createCareer')->name('create');
+            Route::put('/{id}', 'updateCareer')->name('update');
+            Route::delete('/{id}', 'deleteCareer')->name('delete');
+        });
+
+        // Clients Management
+        Route::get('/clients', 'clients')->name('clients.index');
+        Route::prefix('clients')->name('clients.')->group(function () {
+            Route::post('/', 'createClient')->name('create');
+            Route::put('/{id}', 'updateClient')->name('update');
+            Route::delete('/{id}', 'deleteClient')->name('delete');
+        });
+
+        // Solutions Management
+        Route::get('/solutions', 'solutions')->name('solutions.index');
+        Route::prefix('solutions')->name('solutions.')->group(function () {
+            Route::post('/', 'createSolution')->name('create');
+            Route::put('/{id}', 'updateSolution')->name('update');
+            Route::delete('/{id}', 'deleteSolution')->name('delete');
+        });
+
+        // Activities Management
+        Route::get('/activities', 'activities')->name('activities.index');
+        Route::prefix('activities')->name('activities.')->group(function () {
+            Route::post('/', 'createActivity')->name('create');
+            Route::put('/{id}', 'updateActivity')->name('update');
+            Route::delete('/{id}', 'deleteActivity')->name('delete');
+        });
+
+        // Consultations Management
+        Route::get('/consultations', 'consultations')->name('consultations.index');
+        Route::prefix('consultations')->name('consultations.')->group(function () {
+            Route::post('/', 'createConsultation')->name('create');
+            Route::put('/{id}', 'updateConsultation')->name('update');
+            Route::delete('/{id}', 'deleteConsultation')->name('delete');
+        });
+    });

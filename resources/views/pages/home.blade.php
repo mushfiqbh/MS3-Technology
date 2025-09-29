@@ -7,7 +7,6 @@
     @include('home.features')
     @include('home.clients')
     @include('home.activities')
-    @include('home.blogs')
 
     <div class="text-center py-16 bg-gray-100 dark:bg-gray-800">
         <h2 class="text-xl font-bold mb-4">Looking for a software solution? Get Started Today!</h2>

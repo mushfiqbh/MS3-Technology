@@ -6,7 +6,7 @@
 
         <div class="container mx-auto px-6 sm:px-8 lg:px-12">
             <div class="w-full md:w-5/6 mx-auto my-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                @foreach ($experts as $expert)
+                @foreach ($experts->reverse() as $expert)
                     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center p-8 text-center group relative overflow-hidden h-full">
                         <div class="relative mb-4">
                             <img src="{{ asset('/images/activity.webp') }}" alt="{{ $expert->name }}"
@@ -14,7 +14,7 @@
                             <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
                         </div>
                         <h2 class="text-xl font-bold text-blue-700 dark:text-blue-300 mb-1">{{ $expert->name }}</h2>
-                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">{{ $expert->position }}</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">{{ $expert->role }}</div>
                         <div class="text-xs text-gray-400 mb-4">Department: {{ $expert->department }}</div>
                         <div class="flex justify-center gap-3 mb-4">
                             <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition"><i class="fab fa-linkedin text-lg"></i></a>

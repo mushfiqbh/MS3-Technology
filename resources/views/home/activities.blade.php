@@ -1,7 +1,6 @@
 <section class="py-16 w-full bg-gray-50 dark:bg-gray-800">
-    <x-heading title="Activities" subtitle="What Happening Now At IT Lab">
-        Stay updated with the latest developments, projects, and innovations from IT Lab Solutions. We are continuously
-        pushing the boundaries of technology to deliver cutting-edge solutions for our clients.
+    <x-heading title="Activities">
+        What Happening Now At IT Lab
     </x-heading>
 
     <div class="container mx-auto px-6 sm:px-8 lg:px-12">

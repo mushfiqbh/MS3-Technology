@@ -16,7 +16,7 @@
     </div>
 
     <!-- Overlay Content -->
-    <div class="relative z-20 flex flex-col items-start justify-center p-10 sm:px-8 lg:px-24 text-left max-w-3xl">
+    <div class="relative z-20 flex flex-col items-start justify-center px-10 py-24 sm:px-8 lg:px-24 text-left max-w-3xl">
         <!-- Badge -->
         <div
             class="flex items-center gap-2 py-2 rounded-lg shadow text-white text-xs font-semibold tracking-wide animate-fade-in-up">

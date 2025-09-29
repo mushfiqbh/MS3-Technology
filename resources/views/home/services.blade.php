@@ -1,10 +1,8 @@
 <!-- Services Preview Section -->
 <section class="py-24 bg-gray-50 dark:bg-gray-900">
     <div class="container mx-auto px-6 sm:px-8 lg:px-12">
-        <x-heading title="Services" subtitle="Our Unique & Awesome Core Features">
-            Discover our powerful core features, uniquely designed to deliver exceptional performance, user experience,
-            and
-            scalability for every business need.
+        <x-heading title="Services">
+            Our Unique & Awesome Core Features
         </x-heading>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

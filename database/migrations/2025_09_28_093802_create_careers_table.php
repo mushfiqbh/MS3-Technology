@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('requirements')->nullable();
             $table->string('location', 100)->nullable();
-            $table->enum('employment_type', ['Full-time','Part-time','Internship','Contract'])->nullable();
-            $table->enum('status', ['Open','Closed'])->default('Open');
+            $table->enum('employment_type', ['Full-time', 'Part-time', 'Internship', 'Contract'])->nullable();
+            $table->enum('status', ['Open', 'Closed'])->default('Open');
             $table->timestamps();
         });
     }

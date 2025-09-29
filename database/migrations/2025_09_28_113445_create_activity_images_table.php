@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 150);
-            $table->string('url')->nullable();
-            $table->string('image')->nullable();
-            $table->text('note')->nullable();
+        Schema::create('activity_images', function (Blueprint $table) {
+            $table->id();            
+            $table->foreignId('activity_id')->constrained('activities', 'id')->cascadeOnDelete();
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('activity_images');
     }
 };

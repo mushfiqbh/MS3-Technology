@@ -1,8 +1,6 @@
+# Ignore system & editor files
 *.log
 .DS_Store
-.env
-.env.backup
-.env.production
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -12,12 +10,20 @@
 /.vscode
 /.zed
 /auth.json
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
-Homestead.json
-Homestead.yaml
-Thumbs.db
+/Thumbs.db
+
+# Environment files (NEVER upload .env)
+.env
+.env.backup
+.env.production
+
+# Node modules (build locally, then upload /public/build)
+node_modules/
+vendor/
+
+# Storage (but allow public storage for uploads)
+storage/*.key
+storage/pail
+
+# Public (keep build + storage, ignore hot)
+public/hot

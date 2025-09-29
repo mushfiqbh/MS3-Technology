@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title', 150);
             $table->text('description')->nullable();
-            $table->foreignId('client_id')->nullable()->constrained('clients', 'id')->nullOnDelete();
             $table->timestamps();
         });
     }

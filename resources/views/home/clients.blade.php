@@ -1,7 +1,6 @@
 <section id="clients" class="py-16 bg-gray-50 dark:bg-gray-800">
-    <x-heading title="Our Clients" subtitle="Trusted by Industry Leaders" class="mb-12">
-        We are proud to collaborate with a diverse range of clients across various industries. Our commitment to
-        excellence and innovation has earned us the trust of leading companies worldwide.
+    <x-heading title="Our Clients" class="mb-12">
+        Trusted by Industry Leaders
     </x-heading>
 
     <!-- Right-to-left infinite slider -->
