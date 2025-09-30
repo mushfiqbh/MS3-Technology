@@ -6,7 +6,7 @@
     <!-- Right-to-left infinite slider -->
     <div class="relative overflow-hidden mb-10">
         <div id="clients-slider-rtl" class="flex items-center space-x-12 animate-clients-slide-rtl w-max">
-            @foreach (array_merge($clients, $clients) as $client)
+            @foreach ($clients as $client)
                 <div class="flex flex-col items-center w-[120px] h-[60px]">
                     <img src="{{ $client->logo }}" alt="{{ $client->name }}"
                         class="h-16 w-auto mb-2 grayscale hover:grayscale-0 transition duration-300">
@@ -18,7 +18,7 @@
     <!-- Left-to-right infinite slider -->
     <div class="relative overflow-hidden">
         <div id="clients-slider-ltr" class="flex items-center space-x-12 animate-clients-slide-ltr w-max">
-            @foreach (array_merge($clients, $clients) as $client)
+            @foreach ($clients as $client)
                 <div class="flex flex-col items-center w-[120px] h-[60px]">
                     <img src="{{ $client->logo }}" alt="{{ $client->name }}"
                         class="h-16 w-auto mb-2 grayscale hover:grayscale-0 transition duration-300">
@@ -27,6 +27,7 @@
             @endforeach
         </div>
     </div>
+    
     <style>
         @keyframes clients-slide-rtl {
             0% {

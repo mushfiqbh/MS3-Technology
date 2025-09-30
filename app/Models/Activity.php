@@ -15,11 +15,10 @@ class Activity extends Model
         'activity_date',
         'description',
         'status',
-        'image_url',
     ];
 
     public function images()
     {
-        return $this->hasMany(ActivityImage::class);
+        return $this->hasMany(ActivityImage::class, 'activity_id');
     }
 }

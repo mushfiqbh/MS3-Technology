@@ -67,14 +67,14 @@
                             <li><a class="dropdown-item" href="{{ url('/clients/startups') }}">Startup Clients</a></li>
                         </ul>
                     </li>
-                    <li><a class="nav-link" href="{{ url('/blogs') }}">Blog</a></li>
+                    <li><a class="nav-link" href="{{ url('/activities') }}">Blog</a></li>
                     <li><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
 
                 <div class="flex items-center gap-5 ml-4">
                     <a style="padding: 0.5rem 1rem;"
                         class="inline-flex items-center text-sm font-semibold text-blue-600 bg-white hover:bg-blue-600 hover:text-white transition-all duration-200"
-                        href="{{ url('/get-started') }}">
+                        href="{{ url('/consultation') }}">
                         <i class="fas fa-rocket mr-2"></i>
                         Get Free Consultation
                     </a>
@@ -101,7 +101,7 @@
             </div>
         </div>
 
-        <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden"></div>
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 hidden"></div>
         <div id="mobile-menu"
             class="fixed min-h-screen pt-10 inset-y-0 left-0 bg-white dark:bg-gray-800 shadow-lg z-50 transform -translate-x-full transition-transform duration-300 ease-in-out w-80">
             <ul class="bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 flex flex-col p-4 space-y-2 w-full">
@@ -184,7 +184,7 @@
                     </ul>
                 </li>
                 <li><a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
-                        href="{{ url('/blogs') }}">Blog</a></li>
+                        href="{{ url('/activities') }}">Blog</a></li>
                 <li><a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
                         href="{{ url('/contact') }}">Contact</a></li>
                 <li class="mt-4">
@@ -254,23 +254,53 @@
     }
 
     mobileMenuButton.addEventListener('click', toggleMobileMenu);
-    mobileMenuOverlay.addEventListener('click',
-        toggleMobileMenu);
+    mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
     themeSwitcherDesktop.addEventListener('click', toggleTheme);
-    themeSwitcherMobile
-        .addEventListener('click', toggleTheme);
+    themeSwitcherMobile.addEventListener('click', toggleTheme);
 
     // Add event listeners for mobile dropdown buttons
     document.querySelectorAll('.mobile-dropdown-button').forEach(button => {
         button.addEventListener('click', toggleMobileDropdown);
     });
 
-    // Close mobile dropdowns when clicking outside
+    // Close mobile menu when clicking outside
     document.addEventListener('click', (event) => {
+        const isMenuOpen = !mobileMenu.classList.contains('-translate-x-full');
+        
+        // If menu is open and click is outside the menu and not on the menu button
+        if (isMenuOpen && 
+            !event.target.closest('#mobile-menu') && 
+            !event.target.closest('#mobile-menu-button')) {
+            toggleMobileMenu();
+        }
+        
+        // Close mobile dropdowns when clicking outside
         if (!event.target.closest('#mobile-menu')) {
             document.querySelectorAll('.mobile-dropdown-menu').forEach(menu => {
                 menu.classList.add('hidden');
             });
+            // Reset dropdown arrows
+            document.querySelectorAll('.mobile-dropdown-button svg').forEach(arrow => {
+                arrow.classList.remove('rotate-180');
+            });
         }
+    });
+
+    // Close mobile menu when pressing Escape key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            const isMenuOpen = !mobileMenu.classList.contains('-translate-x-full');
+            if (isMenuOpen) {
+                toggleMobileMenu();
+            }
+        }
+    });
+
+    // Close mobile menu when clicking on navigation links
+    document.querySelectorAll('.mobile-nav-link, .mobile-dropdown-item').forEach(link => {
+        link.addEventListener('click', () => {
+            // Small delay to allow navigation to start
+            setTimeout(toggleMobileMenu, 150);
+        });
     });
 </script>

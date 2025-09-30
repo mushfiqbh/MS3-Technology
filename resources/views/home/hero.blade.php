@@ -1,12 +1,8 @@
 <section class="relative h-[70vh] max-h-[70vh] w-full overflow-hidden">
-    <!-- Full Width Background Image -->
-    {{-- <img src="{{ asset('images/hero.png') }}" alt="Digital Journey Illustration"
-        class="absolute inset-0 w-full object-cover object-center z-0" style="height:70vh;max-height:70vh;" /> --}}
-
     <!-- Full Width Background Video -->
-    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover object-center z-0"
+    <video autoplay muted loop preload="metadata" class="absolute inset-0 w-full h-full object-cover object-center z-0"
         style="height:70vh;max-height:70vh;">
-        <source src="{{ asset('videos/hero-video.m4v') }}" type="video/mp4">
+        <source src="{{ asset('storage/' . $heroVideo) }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -16,10 +12,10 @@
     </div>
 
     <!-- Overlay Content -->
-    <div class="relative z-20 flex flex-col items-start justify-center px-10 py-24 sm:px-8 lg:px-24 text-left max-w-3xl">
+    <div class="relative z-20 flex flex-col items-start justify-center px-10 py-20 sm:px-8 lg:px-24 text-left max-w-3xl">
         <!-- Badge -->
         <div
-            class="flex items-center gap-2 py-2 rounded-lg shadow text-white text-xs font-semibold tracking-wide animate-fade-in-up">
+            class="flex items-center gap-2 py-2 px-1 rounded-lg shadow text-white text-xs font-semibold tracking-wide animate-fade-in-up">
             Trusted since 2017
         </div>
         <!-- Main Heading with image -->

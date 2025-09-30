@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Expert;
 use App\Models\Client;
@@ -10,6 +12,7 @@ use App\Models\Career;
 use App\Models\Consultation;
 use App\Models\Solution;
 use App\Models\Activity;
+use App\Models\ActivityImage;
 
 class AdminController extends Controller
 {
@@ -23,7 +26,10 @@ class AdminController extends Controller
             'solutions' => Solution::count(),
             'activities' => Activity::count(),
         ];
-        return view('admin.dashboard', compact('records'));
+
+        $heroVideo = DB::table('settings')->where('key', 'hero_video')->value('value');
+
+        return view('admin.dashboard', compact('records', 'heroVideo'));
     }
 
     public function experts()
@@ -31,6 +37,34 @@ class AdminController extends Controller
         $experts = Expert::all();
         return view('admin.experts', compact('experts'));
     }
+
+    public function updateSettings()
+    {
+        $validated = request()->validate([
+            'hero_video' => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime|max:51200',
+        ]);
+
+        if (request()->hasFile('hero_video')) {
+            $validated['hero_video_url'] = request()->file('hero_video')->store('hero', 'public');
+
+            // delete old video if exists
+            $oldVideo = DB::table('settings')->where('key', 'hero_video')->value('value');
+            if ($oldVideo && Storage::disk('public')->exists($oldVideo)) {
+                Storage::disk('public')->delete($oldVideo);
+            }
+
+            DB::table('settings')->updateOrInsert(
+                ['key' => 'hero_video'],
+                ['value' => $validated['hero_video_url']]
+            );
+        }
+
+        return back()->with('success', 'Hero media updated successfully!');
+    }
+
+
+
+
 
     // ============================ EXPERT MANAGEMENT ============================
     public function createExpert(Request $request)
@@ -88,6 +122,10 @@ class AdminController extends Controller
 
         return back()->with('success', 'Expert deleted successfully!');
     }
+
+
+
+
 
     // ============================ CLIENT MANAGEMENT ============================
     public function clients()
@@ -150,6 +188,10 @@ class AdminController extends Controller
         return back()->with('success', 'Client deleted successfully!');
     }
 
+
+
+
+
     // ============================ CAREER MANAGEMENT ============================
     public function careers()
     {
@@ -198,6 +240,10 @@ class AdminController extends Controller
 
         return back()->with('success', 'Career deleted successfully!');
     }
+
+
+
+
 
     // ============================ CONSULTATION MANAGEMENT ============================
     public function consultations()
@@ -256,6 +302,10 @@ class AdminController extends Controller
         return back()->with('success', 'Consultation deleted successfully!');
     }
 
+
+
+
+
     // ============================ SOLUTION MANAGEMENT ============================
     public function solutions()
     {
@@ -297,11 +347,66 @@ class AdminController extends Controller
         return back()->with('success', 'Solution deleted successfully!');
     }
 
+
+
+
+
     // ============================ ACTIVITY MANAGEMENT ============================
     public function activities()
     {
-        $activities = Activity::all();
+        $activities = Activity::with('images')->get();
         return view('admin.activities', compact('activities'));
+    }
+
+    public function uploadActivityImage(Request $request, $activityId)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max
+        ]);
+
+        $activity = Activity::findOrFail($activityId);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('activities', $filename, 'public');
+
+            $activityImage = ActivityImage::create([
+                'activity_id' => $activity->id,
+                'image_path' => $imagePath,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Image uploaded successfully!',
+                'image' => [
+                    'id' => $activityImage->id,
+                    'url' => asset('storage/' . $imagePath),
+                    'path' => $imagePath
+                ]
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'No image file provided'
+        ], 400);
+    }
+
+    public function deleteActivityImage($activityImageId)
+    {
+        $activityImage = ActivityImage::findOrFail($activityImageId);
+
+        if ($activityImage->image_path && Storage::disk('public')->exists($activityImage->image_path)) {
+            Storage::disk('public')->delete($activityImage->image_path);
+        }
+
+        $activityImage->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Activity image deleted successfully!'
+        ]);
     }
 
     public function createActivity(Request $request)
@@ -312,19 +417,16 @@ class AdminController extends Controller
             'activity_date' => 'nullable|date',
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:upcoming,ongoing,completed,cancelled',
-            'image' => 'nullable|image|max:5120',
         ]);
 
-        if ($request->hasFile('image')) {
-            $validated['image_url'] = $request->file('image')->store('activities', 'public');
-        }
+        $activity = Activity::create($validated);
 
-        // Remove the 'image' field since we're storing 'image_url'
-        unset($validated['image']);
-
-        Activity::create($validated);
-
-        return back()->with('success', 'Activity added successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Activity created successfully!',
+            'activity_id' => $activity->id,
+            'activity' => $activity
+        ]);
     }
 
     public function updateActivity(Request $request, $id)
@@ -337,19 +439,7 @@ class AdminController extends Controller
             'activity_date' => 'nullable|date',
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:upcoming,ongoing,completed,cancelled',
-            'image' => 'nullable|image|max:5120',
         ]);
-
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($activity->image_url && Storage::disk('public')->exists($activity->image_url)) {
-                Storage::disk('public')->delete($activity->image_url);
-            }
-            $validated['image_url'] = $request->file('image')->store('activities', 'public');
-        }
-
-        // Remove the 'image' field since we're storing 'image_url'
-        unset($validated['image']);
 
         $activity->update($validated);
 
@@ -358,13 +448,16 @@ class AdminController extends Controller
 
     public function deleteActivity($id)
     {
-        $activity = Activity::findOrFail($id);
-        
-        // Delete associated image if exists
-        if ($activity->image_url && Storage::disk('public')->exists($activity->image_url)) {
-            Storage::disk('public')->delete($activity->image_url);
+        $activity = Activity::with('images')->findOrFail($id);
+
+        // Delete associated images if exists
+        foreach ($activity->images as $image) {
+            if ($image->image_path && Storage::disk('public')->exists($image->image_path)) {
+                Storage::disk('public')->delete($image->image_path);
+            }
+            $image->delete();
         }
-        
+
         $activity->delete();
 
         return back()->with('success', 'Activity deleted successfully!');

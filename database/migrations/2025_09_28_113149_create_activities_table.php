@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('title', 150);
+            $table->string('category', 100)->nullable();
             $table->date('activity_date')->nullable();
             $table->text('description')->nullable();
+            $table->string('status', 50)->default('upcoming');
             $table->timestamps();
         });
     }
