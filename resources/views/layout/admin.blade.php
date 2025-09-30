@@ -142,7 +142,7 @@
                 <div class="mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
                     <div x-show="expanded" x-transition:enter="transition ease-out duration-200"
                         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="text-center">
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">v1.0.0</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">v1.10.0</p>
                         <p class="text-xs text-gray-400 dark:text-gray-500">© 2025 MS3</p>
                     </div>
                     <div x-show="!expanded" class="flex justify-center">
