@@ -1,8 +1,5 @@
 <div id="features" class="py-16 bg-gray-50 dark:bg-gray-800">
-    <x-heading title="Features" subtitle="Our Unique & Awesome Core Features">
-        Discover our powerful core features, uniquely designed to deliver exceptional performance, user experience, and
-        scalability for every business need.
-    </x-heading>
+    <x-heading title="Features">Our Unique & Awesome Core Features</x-heading>
 
     <div class="py-6 w-full md:w-5/6 mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
