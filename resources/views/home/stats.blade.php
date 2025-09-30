@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="relative w-full mt-20 overflow-x-hidden" x-data="{
+    {{-- <div class="relative w-full mt-20 overflow-x-hidden" x-data="{
         logos: [
             '{{ asset('/images/idea-logo.webp') }}',
             '{{ asset('/images/logo.png') }}',
@@ -61,7 +61,7 @@
         <div
             class="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white dark:from-gray-900 to-transparent">
         </div>
-    </div>
+    </div> --}}
 
     <script>
         // Simple digit animation for stats
