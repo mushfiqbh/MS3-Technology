@@ -144,7 +144,7 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-            $validated['logo_url'] = $request->file('logo')->store('clients', 'public');
+            $validated['logo'] = $request->file('logo')->store('clients', 'public');
         }
 
         Client::create($validated);
@@ -164,10 +164,10 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-            if ($client->logo_url && Storage::disk('public')->exists($client->logo_url)) {
-                Storage::disk('public')->delete($client->logo_url);
+            if ($client->logo && Storage::disk('public')->exists($client->logo)) {
+                Storage::disk('public')->delete($client->logo);
             }
-            $validated['logo_url'] = $request->file('logo')->store('clients', 'public');
+            $validated['logo'] = $request->file('logo')->store('clients', 'public');
         }
 
         $client->update($validated);
@@ -179,8 +179,8 @@ class AdminController extends Controller
     {
         $client = Client::findOrFail($id);
 
-        if ($client->logo_url && Storage::disk('public')->exists($client->logo_url)) {
-            Storage::disk('public')->delete($client->logo_url);
+        if ($client->logo && Storage::disk('public')->exists($client->logo)) {
+            Storage::disk('public')->delete($client->logo);
         }
 
         $client->delete();

@@ -67,6 +67,7 @@
                             <li><a class="dropdown-item" href="{{ url('/clients/startups') }}">Startup Clients</a></li>
                         </ul>
                     </li>
+                    <li><a class="nav-link" href="{{ url('/careers') }}">Career</a></li>
                     <li><a class="nav-link" href="{{ url('/activities') }}">Blog</a></li>
                     <li><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                 </ul>
@@ -183,6 +184,8 @@
                         <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/clients/startups') }}">Startup Clients</a></li>
                     </ul>
                 </li>
+                <li><a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
+                        href="{{ url('/careers') }}">Careers</a></li>
                 <li><a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
                         href="{{ url('/activities') }}">Blog</a></li>
                 <li><a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
