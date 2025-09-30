@@ -44,10 +44,10 @@
             <div>
                 <h3 class="text-lg font-semibold mb-6">Company</h3>
                 <ul class="space-y-3">
-                    <li><a href="{{ url('/about') }}" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="{{ url('/about-us') }}" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
                     <li><a href="{{ url('/activities') }}" class="text-gray-400 hover:text-white transition-colors">Activities</a></li>
                     <li><a href="{{ url('/careers') }}" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="{{ url('/blogs ') }}" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="{{ url('/activities ') }}" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                     <li><a href="{{ url('/contact') }}" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
                 </ul>
             </div>
@@ -97,7 +97,7 @@
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="{{ url('/privacy-policy') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
                     <a href="{{ url('/terms-of-service') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-                    <a href="{{ url('/cookies') }}" class="text-gray-400 hover:text-white text-sm transition-colors">Cookies</a>
+                    <a href="{{ url('/about-us') }}" class="text-gray-400 hover:text-white text-sm transition-colors">About Us</a>
                 </div>
             </div>
         </div>
