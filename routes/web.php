@@ -1,38 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-
-Route::get('/', function () {
-    $clients = [
-        (object)['name' => 'Client 1', 'logo' => '/images/idea-logo.webp'],
-        (object)['name' => 'Client 2', 'logo' => '/images/idea-logo.webp'],
-        (object)['name' => 'Client 3', 'logo' => '/images/idea-logo.webp'],
-        (object)['name' => 'Client 4', 'logo' => '/images/idea-logo.webp'],
-        (object)['name' => 'Client 5', 'logo' => '/images/idea-logo.webp'],
-        // Add more clients as needed
-    ];
-    $stats = [
-        ['label' => 'Happy Clients', 'value' => 150],
-        ['label' => 'Completed Projects', 'value' => 320],
-        ['label' => 'Employees', 'value' => 75],
-        ['label' => 'Awards', 'value' => 25],
-        ['label' => 'Partners', 'value' => 40],
-    ];
-
-    return view('pages.home', compact('clients', 'stats'));
-});
-
-Route::get('/experts', function () {
-    $experts = DB::table('experts')->get();
-    return view('pages.experts', compact('experts'));
-})->name('experts');
-
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
+use App\Http\Controllers\PublicPageController;
 
 
 // =============================================================================
@@ -40,19 +11,27 @@ Route::get('/contact', function () {
 // =============================================================================
 
 // Home Page
-// Route::get('/', [HomeController::class, '])->name('home');
+Route::get('/', [PublicPageController::class, 'index'])->name('home');
 
 // Public Pages
-// Route::controller(PublicPageController::class)->group(function () {
-//     Route::get('/about', 'about')->name('about');
-//     Route::get('/contact', 'contact')->name('contact');
-//     Route::get('/gallery', 'gallery')->name('gallery');
-//     Route::get('/features', 'features')->name('features');
-//     Route::get('/customers', 'customers')->name('customers');
-//     Route::get('/news', 'news')->name('news');
-//     Route::get('/news/{slug}', 'showNews')->name('news.show');
-// });
+Route::get('/experts', [PublicPageController::class, 'experts'])->name('experts');
+Route::get('/clients', [PublicPageController::class, 'clients'])->name('clients');
+Route::get('/activities', [PublicPageController::class, 'activities'])->name('activities');
+Route::get('/activities/{id}', [PublicPageController::class, 'activityDetails'])->name('activities.details');
+Route::get('/careers', [PublicPageController::class, 'careers'])->name('careers');
+Route::get('/careers/{id}', [PublicPageController::class, 'careerDetails'])->name('careers.details');
+Route::get('/solutions/{id}', [PublicPageController::class, 'solutionDetails'])->name('solutions.details');
 
+
+// Additional Public Pages
+Route::get('/contact', [PublicPageController::class, 'contact'])->name('contact');
+Route::get('/about-us', [PublicPageController::class, 'aboutUs'])->name('about');
+Route::get('/privacy-policy', [PublicPageController::class, 'privacyPolicy'])->name('privacy');
+Route::get('/terms-of-service', [PublicPageController::class, 'termsOfService'])->name('terms');
+
+// Consultation
+Route::get('/consultation', [PublicPageController::class, 'showConsultationForm'])->name('consultation.form');
+Route::post('/consultation/submit', [PublicPageController::class, 'submitConsultation'])->name('consultation.submit');
 
 
 // =============================================================================
@@ -82,7 +61,9 @@ Route::prefix('admin')
     ->group(function () {
 
         // Dashboard
+        Route::get('/', 'index')->name('dashboard');
         Route::get('/dashboard', 'index')->name('dashboard');
+        Route::post('/update-settings', 'updateSettings')->name('update.settings');
 
         // Experts Management
         Route::get('/experts', 'experts')->name('experts.index');
@@ -120,8 +101,10 @@ Route::prefix('admin')
         Route::get('/activities', 'activities')->name('activities.index');
         Route::prefix('activities')->name('activities.')->group(function () {
             Route::post('/', 'createActivity')->name('create');
+            Route::post('/{id}/upload-image', 'uploadActivityImage')->name('uploadImage');
             Route::put('/{id}', 'updateActivity')->name('update');
-            Route::delete('/{id}', 'deleteActivity')->name('delete');
+            Route::delete('/{activityId}', 'deleteActivity')->name('delete');
+            Route::delete('/delete-image/{activityImageId}', 'deleteActivityImage')->name('deleteImage');
         });
 
         // Consultations Management
