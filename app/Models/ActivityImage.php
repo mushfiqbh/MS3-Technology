@@ -11,11 +11,11 @@ class ActivityImage extends Model
 
     protected $fillable = [
         'activity_id',
-        'image',
+        'image_path',
     ];
 
     public function activity()
     {
-        return $this->belongsTo(Activity::class);
+        return $this->belongsTo(Activity::class, 'activity_id');
     }
 }
