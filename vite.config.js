@@ -4,11 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
     base: "/",
-    build: {
-        outDir: "public/build",
-        manifest: true,
-        assetsDir: "assets",
-    },
     plugins: [
         laravel({
             input: ["resources/css/app.css", "resources/js/app.js"],
@@ -16,6 +11,11 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    build: {
+        outDir: "public/build",
+        manifest: true,
+        assetsDir: "assets",
+    },
     css: {
         devSourcemap: true,
     },

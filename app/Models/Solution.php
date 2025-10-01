@@ -9,7 +9,7 @@ class Solution extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'icon', 'slug'];
 
     public function clients()
     {

@@ -27,5 +27,12 @@
                 </div>
             @endforeach
         </div>
+
+        <div class="mt-8 text-center">
+            <a href="{{ route('activities') }}"
+                class="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300">
+                View All Activities
+            </a>
+        </div>
     </div>
 </section>

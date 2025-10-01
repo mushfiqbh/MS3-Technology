@@ -20,7 +20,7 @@ Route::get('/activities', [PublicPageController::class, 'activities'])->name('ac
 Route::get('/activities/{id}', [PublicPageController::class, 'activityDetails'])->name('activities.details');
 Route::get('/careers', [PublicPageController::class, 'careers'])->name('careers');
 Route::get('/careers/{id}', [PublicPageController::class, 'careerDetails'])->name('careers.details');
-Route::get('/solutions/{id}', [PublicPageController::class, 'solutionDetails'])->name('solutions.details');
+Route::get('/solutions/{slug}', [PublicPageController::class, 'solutionDetails'])->name('solutions.details');
 
 
 // Additional Public Pages
