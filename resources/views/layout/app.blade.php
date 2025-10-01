@@ -40,7 +40,5 @@
         </main>
 
         @include('layout.footer')
-
-        <x-chat/>
     </body>
 </html>

@@ -1,3 +1,8 @@
+<?php
+$solutions = \App\Models\Solution::all();
+$clients = \App\Models\Client::all();
+?>
+
 <nav
     class="sticky top-0 z-50 lg:px-20 w-full min-h-[5rem] dark:bg-gray-900/80 backdrop-blur-md shadow-lg transition-colors duration-300">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,12 +46,11 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('/solutions/industry') }}">Industry Solutions</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{{ url('/solutions/enterprise') }}">Enterprise
-                                    Solutions</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/solutions/startup') }}">Startup Solutions</a>
-                            </li>
+                            @foreach ($solutions as $solution)
+                                <li><a class="dropdown-item"
+                                        href="{{ url('/solutions/' . $solution->slug) }}">{{ $solution->title }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="relative group">
@@ -60,11 +64,11 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('/clients/corporate') }}">Corporate Clients</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{{ url('/clients/government') }}">Government Clients</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{{ url('/clients/startups') }}">Startup Clients</a></li>
+                            @foreach ($clients as $client)
+                                <li><a class="dropdown-item"
+                                        href="{{ url('/clients/' . strtolower($client->category)) }}">{{ $client->name }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
                     <li><a class="nav-link" href="{{ url('/careers') }}">Career</a></li>
@@ -116,12 +120,11 @@
                     <button
                         class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
                         <span><i class="fas fa-info-circle mr-3"></i>About</span>
-                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20"
-                            fill="currentColor">
+                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                 clip-rule="evenodd" />
-                        </svg>  
+                        </svg>
                     </button>
                     <ul class="mobile-dropdown-menu hidden mt-2 ml-4 space-y-1">
                         <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
@@ -137,7 +140,7 @@
                 <li class="relative">
                     <button
                         class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
-                        <span><i class="fas fa-cogs mr-3"></i>Services</span>
+                        <span><i class="fas fa-cogs mr-3"></i>Solutions</span>
                         <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
@@ -146,42 +149,28 @@
                         </svg>
                     </button>
                     <ul class="mobile-dropdown-menu hidden mt-2 ml-4 space-y-1">
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/services/web-development') }}">Web Development</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/services/mobile-apps') }}">Mobile Apps</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/services/cloud-solutions') }}">Cloud Solutions</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/services/consulting') }}">IT Consulting</a></li>
-                    </ul>
-                </li>
-                <li class="relative">
-                    <button
-                        class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
-                        <span><i class="fas fa-lightbulb mr-3"></i>Solutions</span>
-                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <ul class="mobile-dropdown-menu hidden mt-2 ml-4 space-y-1">
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/solutions/industry') }}">Industry Solutions</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/solutions/enterprise') }}">Enterprise Solutions</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/solutions/startup') }}">Startup Solutions</a></li>
+                        @foreach ($solutions as $solution)
+                            <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
+                                    href="{{ url('/solutions/' . $solution->slug) }}">{{ $solution->title }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="relative">
                     <button
                         class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
                         <span><i class="fas fa-users mr-3"></i>Clients</span>
-                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
                         </svg>
                     </button>
                     <ul class="mobile-dropdown-menu hidden mt-2 ml-4 space-y-1">
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/clients/corporate') }}">Corporate Clients</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/clients/government') }}">Government Clients</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200" href="{{ url('/clients/startups') }}">Startup Clients</a></li>
+                        @foreach ($solutions as $solution)
+                            <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
+                                    href="{{ url('/solutions/' . $solution->slug) }}">{{ $solution->title }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
@@ -269,14 +258,14 @@
     // Close mobile menu when clicking outside
     document.addEventListener('click', (event) => {
         const isMenuOpen = !mobileMenu.classList.contains('-translate-x-full');
-        
+
         // If menu is open and click is outside the menu and not on the menu button
-        if (isMenuOpen && 
-            !event.target.closest('#mobile-menu') && 
+        if (isMenuOpen &&
+            !event.target.closest('#mobile-menu') &&
             !event.target.closest('#mobile-menu-button')) {
             toggleMobileMenu();
         }
-        
+
         // Close mobile dropdowns when clicking outside
         if (!event.target.closest('#mobile-menu')) {
             document.querySelectorAll('.mobile-dropdown-menu').forEach(menu => {

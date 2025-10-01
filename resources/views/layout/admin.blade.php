@@ -1,6 +1,39 @@
-@extends('layout.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Panel - MS3 Technology BD</title>
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous">
+
+    <!-- Alpine.js Cloak -->
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900">
     <div class="w-full flex relative" x-data="{ sidebarOpen: false, expanded: true }"
         @resize.window="if (window.innerWidth >= 1024) { sidebarOpen = false }">
         <!-- Mobile Overlay -->
@@ -13,11 +46,11 @@
 
         <!-- Sidebar -->
         <div x-show="sidebarOpen || window.innerWidth >= 1024"
-            x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="-translate-x-full"
-            x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
-            x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-            :class="expanded ? 'w-56' : 'w-16'"
-            class="fixed lg:relative inset-y-0 left-0 z-30 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 min-h-screen transition-all duration-300 ease-in-out overflow-hidden shadow-2xl border-r border-gray-200 dark:border-gray-700 pt-20 lg:pt-0">
+            x-transition:enter="transition ease-in-out duration-300 transform"
+            x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+            x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0"
+            x-transition:leave-end="-translate-x-full" :class="expanded ? 'w-56' : 'w-16'"
+            class="fixed lg:relative inset-y-0 left-0 z-30 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 min-h-screen transition-all duration-300 ease-in-out overflow-y-auto shadow-2xl border-r border-gray-200 dark:border-gray-700">
 
             <div class="p-3">
                 <!-- Header -->
@@ -126,11 +159,56 @@
                         </a>
                     @endforeach
 
+                    <div class="ml-4 pt-4">
+                        <a href="/" target="_blank"
+                            class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
+                            <i class="fas fa-globe mr-2"></i>
+                            <span x-show="expanded">Go To Website</span>
+                        </a>
+                    </div>
+
+                    <!-- Theme Switcher -->
+                    <div class="flex items-center mt-2">
+                        <button x-data="{ dark: localStorage.getItem('theme') === 'dark' || (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme')) }"
+                            @click="
+                                    dark = !dark;
+                                    if (dark) {
+                                        document.documentElement.classList.add('dark');
+                                        localStorage.setItem('theme', 'dark');
+                                    } else {
+                                        document.documentElement.classList.remove('dark');
+                                        localStorage.setItem('theme', 'light');
+                                    }
+                                "
+                            :aria-pressed="dark" :class="dark ? 'text-yellow-400' : 'text-gray-700'"
+                            class="w-10 h-10 transition-colors duration-200 focus:outline-none" title="Toggle Theme">
+                            <template x-if="dark">
+                                <div class="ml-4 flex items-center gap-2">
+                                    <i class="fas fa-moon"></i>
+                                    <span x-show="expanded"
+                                        class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white select-none">
+                                        <span>Theme</span>
+                                    </span>
+                                </div>
+                            </template>
+                            <template x-if="!dark">
+                                <div class="ml-4 flex items-center gap-2">
+                                    <i class="fas fa-sun"></i>
+                                    <span x-show="expanded"
+                                        class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white select-none">
+                                        <span>Theme</span>
+                                    </span>
+                                </div>
+                            </template>
+                        </button>
+                    </div>
+
                     {{-- Logout --}}
-                    <div class="mt-4 pt-4 rounded-lg p-2">
+                    <div class="pt-4 rounded-lg p-2">
                         <form action="{{ route('admin.logout') }}" method="POST" class="inline">
                             @csrf
-                            <button type="submit" class="flex items-center justify-center text-white bg-red-400 dark:bg-red-900 gap-2 px-2 py-1 rounded-lg hover:underline cursor-pointer">
+                            <button type="submit"
+                                class="flex items-center justify-center text-white bg-red-400 dark:bg-red-900 gap-2 px-2 py-1 rounded-lg hover:underline cursor-pointer">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span x-show="expanded">Logout</span>
                             </button>
@@ -139,9 +217,10 @@
                 </nav>
 
                 <!-- Footer -->
-                <div class="mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
+                <div class="mt-auto pt-3">
                     <div x-show="expanded" x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="text-center">
+                        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                        class="text-center">
                         <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">v1.10.2</p>
                         <p class="text-xs text-gray-400 dark:text-gray-500">© 2025 MS3</p>
                     </div>
@@ -253,6 +332,16 @@
 
     <!-- Enhanced JavaScript -->
     <script>
+        (function() {
+            const userTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (userTheme === 'dark' || (!userTheme && systemDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+
         // Initialize sidebar state
         document.addEventListener('DOMContentLoaded', function() {
             // Auto-close sidebar on mobile after navigation
@@ -287,4 +376,6 @@
             }
         });
     </script>
-@endsection
+</body>
+
+</html>
