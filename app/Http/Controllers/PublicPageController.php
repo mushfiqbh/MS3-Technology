@@ -9,6 +9,8 @@ use App\Models\Client;
 use App\Models\Expert;
 use App\Models\Activity;
 use App\Models\Consultation;
+use App\Models\Career;
+use App\Models\Solution;
 
 
 class PublicPageController extends Controller
@@ -16,7 +18,28 @@ class PublicPageController extends Controller
     public function index()
     {
         $clients = Client::all();
-        $activities = Activity::with('images')->orderBy('activity_date', 'desc')->limit(3)->get();
+        $activities = Activity::with('images')->orderBy('activity_date', 'desc')->limit(6)->get();
+        $solutions = DB::table('solutions')->orderBy('created_at', 'desc')->limit(6)->get();
+
+        $features = [
+            ['icon' => 'fa-solid fa-lightbulb', 'title' => 'Innovative Solutions', 'description' => 'Cutting-edge technology tailored to your needs.'],
+            ['icon' => 'fa-solid fa-users', 'title' => 'Expert Team', 'description' => 'Skilled professionals dedicated to your success.'],
+            ['icon' => 'fa-solid fa-clock', 'title' => 'Timely Delivery', 'description' => 'Projects completed on schedule, every time.'],
+            ['icon' => 'fa-solid fa-thumbs-up', 'title' => 'Customer Satisfaction', 'description' => 'Committed to exceeding client expectations.'],
+            ['icon' => 'fa-solid fa-shield-alt', 'title' => 'Secure Systems', 'description' => 'Robust security measures to protect your data.'],
+            ['icon' => 'fa-solid fa-cogs', 'title' => 'Customizable Services', 'description' => 'Solutions tailored to fit your unique requirements.'],
+        ];
+
+        $techStacks = [
+            ['name' => 'Laravel', 'icon' => 'fab fa-laravel', 'color' => 'from-red-500 to-orange-500'],
+            ['name' => 'MySQL', 'icon' => 'fab fa-database', 'color' => 'from-green-400 to-emerald-500'],
+            ['name' => 'React', 'icon' => 'fab fa-react', 'color' => 'from-blue-400 to-cyan-400'],
+            ['name' => 'Node.js', 'icon' => 'fab fa-node-js', 'color' => 'from-green-600 to-lime-500'],
+            ['name' => 'Python', 'icon' => 'fab fa-python', 'color' => 'from-blue-500 to-yellow-400'],
+            ['name' => 'Docker', 'icon' => 'fab fa-docker', 'color' => 'from-blue-500 to-blue-600'],
+            ['name' => 'AWS', 'icon' => 'fab fa-aws', 'color' => 'from-orange-500 to-yellow-500'],
+            ['name' => 'Angular', 'icon' => 'fab fa-angular', 'color' => 'from-red-600 to-pink-500'],
+        ];
 
         $stats = [
             ['label' => 'Happy Clients', 'value' => 150],
@@ -28,7 +51,7 @@ class PublicPageController extends Controller
 
         $heroVideo = DB::table('settings')->where('key', 'hero_video')->value('value');
 
-        return view('pages.home', compact('clients', 'activities', 'stats', 'heroVideo'));
+        return view('pages.home', compact('clients', 'activities', 'solutions', 'features', 'techStacks', 'stats', 'heroVideo'));
     }
 
 
@@ -48,22 +71,24 @@ class PublicPageController extends Controller
         return view('pages.clients', compact('clients'));
     }
 
-    public function solutionDetails($id)
+    public function solutionDetails($slug)
     {
-        // Placeholder for solution details logic
-        return view('pages.solution-details', compact('id'));
+        $solution = Solution::where('slug', $slug)->firstOrFail();
+        $clients = $solution->clients;
+
+        return view('pages.solution-details', compact('solution', 'clients'));
     }
 
     public function careers()
     {
-        // Placeholder for careers listing logic
-        return view('pages.careers');
+        $careers = Career::orderBy('created_at', 'desc')->get();
+        return view('pages.careers', compact('careers'));
     }
 
     public function careerDetails($id)
     {
-        // Placeholder for career details logic
-        return view('pages.career-details', compact('id'));
+        $career = Career::findOrFail($id);
+        return view('pages.careerDetails', compact('career'));
     }
 
     public function activities(Request $request)
