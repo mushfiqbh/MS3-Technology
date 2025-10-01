@@ -1,9 +1,51 @@
 @extends('layout.app')
 
 @section('content')
-    <div>
-        <x-page-header title="Our Activities" subtitle="Discover our latest projects, events, and company milestones" />
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="absolute inset-0">
+            <div
+                class="absolute top-10 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse">
+            </div>
+            <div
+                class="absolute bottom-10 right-10 w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-75">
+            </div>
+        </div>
 
+        <div class="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Our Activities & Events
+                </h1>
+                <p class="text-lg sm:text-xl text-blue-100 mb-8 leading-relaxed">
+                    Stay updated with our latest activities, events, and achievements. Discover what we've been working on
+                    and what's coming next.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="flex items-center gap-2 text-blue-100">
+                        <i class="fas fa-calendar-alt text-2xl"></i>
+                        <span class="text-lg font-semibold">{{ $activities->total() }} Total Activities</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-8 bg-blue-300"></div>
+                    <div class="flex items-center gap-2 text-blue-100">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                        <span class="text-lg font-semibold">{{ $activities->where('status', 'Completed')->count() }}
+                            Completed</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-8 bg-blue-300"></div>
+                    <div class="flex items-center gap-2 text-blue-100">
+                        <i class="fas fa-spinner text-2xl"></i>
+                        <span class="text-lg font-semibold">{{ $activities->where('status', 'Ongoing')->count() }}
+                            Ongoing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="bg-gray-50 dark:bg-gray-900">
         <div class="w-full md:w-5/6 mx-auto my-20 flex flex-col lg:flex-row gap-8">
             <!-- Activities List -->
             <div class="flex-1">
@@ -26,7 +68,8 @@
                                     </div>
                                 @endif
 
-                                <div class="flex-1 flex flex-col p-4 gap-2">
+                                <a href="{{ route('activities.details', $activity->id) }}"
+                                    class="flex-1 flex flex-col p-4 gap-2">
                                     <!-- Category and Date -->
                                     <div class="flex items-center justify-between gap-2 mb-1">
                                         <span
@@ -75,12 +118,8 @@
                                                     class="fas fa-clock mr-1"></i>{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}
                                             </span>
                                         @endif
-                                        <a href="{{ route('activities.details', $activity->id) }}"
-                                            class="text-blue-600 dark:text-blue-400 text-sm font-semibold hover:underline">
-                                            View Details
-                                        </a>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -240,5 +279,5 @@
                 </div>
             </aside>
         </div>
-    </div>
+    </section>
 @endsection
