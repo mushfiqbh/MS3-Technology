@@ -1,9 +1,45 @@
 @extends('layout.app')
 
 @section('content')
-    <x-page-header title="Contact Us" subtitle="Get in Touch with IT Lab Solutions" />
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20 overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-75"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Get In Touch
+                </h1>
+                <p class="text-lg sm:text-xl text-blue-100 mb-8 leading-relaxed">
+                    Have a question or want to work together? We'd love to hear from you. Our team is ready to help bring your ideas to life.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="flex items-center gap-2 text-blue-100">
+                        <i class="fas fa-clock text-2xl"></i>
+                        <span class="text-lg font-semibold">24/7 Support Available</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-8 bg-blue-300"></div>
+                    <div class="flex items-center gap-2 text-blue-100">
+                        <i class="fas fa-reply text-2xl"></i>
+                        <span class="text-lg font-semibold">Quick Response Time</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-8 bg-blue-300"></div>
+                    <div class="flex items-center gap-2 text-blue-100">
+                        <i class="fas fa-handshake text-2xl"></i>
+                        <span class="text-lg font-semibold">Friendly Team</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 mb-12">
+    <!-- Main Content -->
+    <section class="bg-gray-50 dark:bg-gray-900 py-16">
+        <div class="w-full max-w-5xl mx-auto px-6 flex flex-col md:flex-row gap-8 mb-12">
         <!-- Contact Info Card -->
         <div class="flex-1 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg p-8 flex flex-col justify-center gap-6 min-h-[340px]">
             <h2 class="text-3xl font-extrabold text-blue-700 dark:text-blue-300 mb-2 flex items-center gap-3">
@@ -93,4 +129,5 @@
             </form>
         </div>
     </div>
+    </section>
 @endsection
