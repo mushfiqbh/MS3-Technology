@@ -17,52 +17,6 @@
         </div>
     </div>
 
-    {{-- <div class="relative w-full mt-20 overflow-x-hidden" x-data="{
-        logos: [
-            '{{ asset('/images/idea-logo.webp') }}',
-            '{{ asset('/images/logo.png') }}',
-            '{{ asset('/images/hero.png') }}',
-            '{{ asset('/images/activity.webp') }}',
-            '{{ asset('/images/idea-logo.webp') }}',
-            '{{ asset('/images/logo.png') }}',
-            '{{ asset('/images/hero.png') }}',
-            '{{ asset('/images/activity.webp') }}',
-            '{{ asset('/images/idea-logo.webp') }}',
-            '{{ asset('/images/logo.png') }}'
-        ],
-        get sliderWidth() { return this.logos.length * 96; },
-        offset: 0,
-        animationId: null,
-        start() { this.animate(); },
-        animate() {
-            this.offset -= 1.2;
-            if (Math.abs(this.offset) >= this.sliderWidth) {
-                this.offset += this.sliderWidth;
-            }
-            this.animationId = requestAnimationFrame(() => this.animate());
-        },
-        stop() { cancelAnimationFrame(this.animationId); }
-    }" x-init="start()"
-        @mouseenter="stop()" @mouseleave="start()" style="height: 96px;">
-        <div class="flex items-center gap-4 absolute left-0 top-0"
-            :style="`transform: translateX(${offset}px); width: ${sliderWidth * 2}px;`">
-            <template x-for="(logo, idx) in [...logos, ...logos]" :key="idx">
-                <div class="w-24 h-24 flex items-center justify-center">
-                    <img :src="logo" alt="Logo"
-                        class="w-20 h-20 object-contain select-none pointer-events-none" draggable="false">
-                </div>
-            </template>
-        </div>
-        <!-- Gradient fade left -->
-        <div
-            class="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white dark:from-gray-900 to-transparent">
-        </div>
-        <!-- Gradient fade right -->
-        <div
-            class="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white dark:from-gray-900 to-transparent">
-        </div>
-    </div> --}}
-
     <script>
         // Simple digit animation for stats
         document.addEventListener('DOMContentLoaded', function() {

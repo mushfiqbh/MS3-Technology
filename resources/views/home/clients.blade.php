@@ -10,7 +10,6 @@
                 <div class="flex flex-col items-center w-[120px] h-[60px]">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
                         class="h-16 w-auto mb-2 transition duration-300">
-                    <span class="text-xs text-gray-600 dark:text-gray-300">{{ $client->name }}</span>
                 </div>
             @endforeach
         </div>
@@ -22,12 +21,11 @@
                 <div class="flex flex-col items-center w-[120px] h-[60px]">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
                         class="h-16 w-auto mb-2 transition duration-300">
-                    <span class="text-xs text-gray-600 dark:text-gray-300">{{ $client->name }}</span>
                 </div>
             @endforeach
         </div>
     </div>
-    
+
     <style>
         @keyframes clients-slide-rtl {
             0% {
