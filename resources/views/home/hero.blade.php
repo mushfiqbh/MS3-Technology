@@ -32,14 +32,14 @@
         <!-- CTA Buttons -->
 
         <div class="flex gap-4 animate-fade-in-up animation-delay-600">
-            <a href="{{ url('/case-study') }}"
+            <a href="{{ url('/about-us') }}"
                 class="group inline-flex items-center px-6 py-2.5 text-sm text-white bg-transparent border border-white font-semibold transform hover:scale-105 transition-all duration-300">
-                Case Study
+                About Us
             </a>
 
-            <a href="{{ url('/lets-talk') }}"
+            <a href="{{ url('/contact') }}"
                 class="group inline-flex items-center px-6 py-2.5 text-sm text-black bg-white font-semibold transform hover:scale-105 transition-all duration-300">
-                Lets's Talk
+                Let's Talk
             </a>
         </div>
 

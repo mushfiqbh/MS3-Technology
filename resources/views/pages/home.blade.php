@@ -8,7 +8,7 @@
     @include('home.clients')
     @include('home.activities')
 
-    <div class="text-center py-16 bg-gray-100 dark:bg-gray-800">
+    <div class="px-4 sm:px-6 lg:px-8 text-center py-16 bg-gray-100 dark:bg-gray-800">
         <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Looking for a software solution? Get Started Today!
         </h2>
         <p class="text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto">We are a software development company that
