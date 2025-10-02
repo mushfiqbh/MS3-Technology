@@ -2,8 +2,8 @@
 deployment:
   tasks:
     # === SET PATHS ===
-    - export DEPLOYPATH=/home2/barnomala/public_html/
-    - export APPPATH=/home2/barnomala/public_html/application/
+    - export DEPLOYPATH=/home2/ms3technology/public_html/
+    - export APPPATH=/home2/ms3technology/public_html/application/
 
     # === COPY PUBLIC FILES TO public_html ===
     - /bin/cp -R public/* $DEPLOYPATH
