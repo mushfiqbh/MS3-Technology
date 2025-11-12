@@ -68,7 +68,7 @@
                     </div>
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-envelope text-blue-500"></i>
-                        <p class="text-gray-400">ms3technology87@gmail.com</p>
+                        <p class="text-gray-400">teambornomala@gmail.com</p>
                     </div>
                 </div>
 
