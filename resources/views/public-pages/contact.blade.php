@@ -51,14 +51,15 @@
                     <i class="fas fa-envelope text-blue-600 text-xl"></i>
                     <div>
                         <div class="text-xs text-gray-500">Email</div>
-                        <a href="mailto:ms3technology87@gmail.com" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-blue-600">ms3technology87@gmail.com</a>
+                        <a href="mailto:teambornomala@gmail.com" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-blue-600">teambornomala@gmail.com</a>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
                     <i class="fas fa-phone text-blue-600 text-xl"></i>
                     <div>
                         <div class="text-xs text-gray-500">Phone</div>
-                        <a href="tel:+8801842485222" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-blue-600">+880 1842 485 222</a>
+                        <a href="tel:+8801744-221385" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-blue-600">+880 1744-221385</a>,
+                        <a href="tel:+8801842485222" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-blue-600">+880 1842-485222</a>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-4 shadow col-span-1 sm:col-span-2">
@@ -74,7 +75,7 @@
                 </div>
                 <div class="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
                     <i class="fab fa-whatsapp text-green-500 text-xl"></i>
-                    <a href="https://wa.me/8801842485222" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-green-600">WhatsApp</a>
+                    <a href="https://wa.me/8801744221385" class="font-semibold text-gray-800 dark:text-gray-100 hover:text-green-600">WhatsApp</a>
                 </div>
             </div>
         </div>
