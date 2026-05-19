@@ -1,43 +1,39 @@
 ---
 deployment:
   tasks:
-    # === SET PATHS ===
-    - export DEPLOYPATH=/home2/ms3technology/public_html/
-    - export APPPATH=/home2/ms3technology/public_html/application/
+    # Set deployment path
+    - export APPPATH=../../laravel_app
+    - export PUBLICPATH=../../public_html
 
-    # === COPY PUBLIC FILES TO public_html ===
-    - /bin/cp -R public/* $DEPLOYPATH
-    - /bin/cp public/.htaccess $DEPLOYPATH
-
-    # === CREATE APPLICATION DIRECTORY ===
+    # === Create backend folder if not exists ===
     - /bin/mkdir -p $APPPATH
-    - /bin/mkdir -p $APPPATH/public
 
-    # === COPY ROOT FILES & DIRECTORIES TO APPLICATION FOLDER ===
-    - /bin/cp -R app bootstrap config database resources routes tests storage $APPPATH
-    - /bin/cp -R public/build $APPPATH/public
+    # === Copy backend folders ===
+    - /bin/cp -R app $APPPATH
+    - /bin/cp -R bootstrap $APPPATH
+    - /bin/cp -R config $APPPATH
+    - /bin/cp -R database $APPPATH
+    - /bin/cp -R resources $APPPATH
+    - /bin/cp -R routes $APPPATH
+    - /bin/cp -R storage $APPPATH
+
+    # === Copy core files ===
     - /bin/cp artisan $APPPATH
     - /bin/cp composer.json $APPPATH
-    - /bin/cp composer.lock $APPPATH
-    - /bin/cp package.json $APPPATH
-    - /bin/cp package-lock.json $APPPATH
-    - /bin/cp vite.config.js $APPPATH
-    - /bin/cp phpunit.xml $APPPATH
+    - /bin/cp composer.lock $APPPATH || true
+    - /bin/cp .env.example $APPPATH || true
 
-    - /bin/cp .editorconfig $APPPATH
-    - /bin/cp .env.example $APPPATH
+    # === Delete index.html if exists ===
+    - /bin/rm -f $PUBLICPATH/index.html
 
-    # === REMOVE FILES WE DON’T WANT ===
-    - /bin/rm -rf $APPPATH/.git
+    # === Copy public folder contents to public_html ===
+    - /bin/cp -R public/* $PUBLICPATH
+    - /bin/cp -R public/.htaccess $PUBLICPATH || true
 
-    # === INSTALL PHP DEPENDENCIES ===
-    - cd $APPPATH && /opt/cpanel/composer/bin/composer install --no-dev --optimize-autoloader
+    # === Unzip the build.zip file to the public directory ===
+    - /bin/unzip -o public/build.zip -d $APPPATH/public || true
+    - /bin/unzip -o public/build.zip -d $PUBLICPATH || true
 
-    # === INSTALL NODE DEPENDENCIES & BUILD VITE ===
-    - cd $APPPATH && /usr/local/bin/npm install
-    - cd $APPPATH && /usr/local/bin/npm run build
-
-    # === OPTIMIZE LARAVEL ===
-    - cd $APPPATH && /opt/cpanel/ea-php82/root/usr/bin/php artisan config:cache
-    - cd $APPPATH && /opt/cpanel/ea-php82/root/usr/bin/php artisan route:cache
-    - cd $APPPATH && /opt/cpanel/ea-php82/root/usr/bin/php artisan view:cache
+    # === Fix index.php paths ===
+    - /bin/sed -i "s|../vendor/autoload.php|../laravel_app/vendor/autoload.php|g" $PUBLICPATH/index.php
+    - /bin/sed -i "s|../bootstrap/app.php|../laravel_app/bootstrap/app.php|g" $PUBLICPATH/index.php
