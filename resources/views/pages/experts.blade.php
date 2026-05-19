@@ -1,28 +1,57 @@
 @extends('layout.app')
 
 @section('content')
-    <div id="experts">
-        <x-page-header title="Experts" subtitle="Latest Insights and Updates from IT Lab Solutions" />
-
-        <div class="container mx-auto px-6 sm:px-8 lg:px-12">
-            <div class="w-full md:w-5/6 mx-auto my-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div id="experts" class="bg-gray-50/50 dark:bg-slate-950/50 min-h-screen">
+        <x-page-header title="Experts" subtitle="Our Team of IT Experts" />
+    
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($experts->reverse() as $expert)
-                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center p-8 text-center group relative overflow-hidden h-full">
-                        <div class="relative mb-4">
-                            <img src="{{ asset( $expert->photo_url ? 'storage/' . $expert->photo_url : 'images/default-expert.png') }}" alt="{{ $expert->name }}"
-                                class="w-32 h-32 rounded-full object-cover object-center border-4 border-blue-100 dark:border-blue-900 shadow-lg mx-auto transition-transform group-hover:scale-105">
-                            <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    <div class="group relative bg-slate-200 dark:bg-slate-900 rounded-2xl border border-gray-100 dark:border-slate-800/80 p-8 hover:border-transparent dark:hover:border-transparent hover:shadow-xl hover:shadow-gray-200/50 dark:hover:shadow-none transition-all duration-300 flex flex-col justify-between">
+                        
+                        <!-- Top Card Details -->
+                        <div>
+                            <!-- Department Badge -->
+                            <div class="absolute top-4 right-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-100/50 dark:border-blue-900/30">
+                                    {{ $expert->department }}
+                                </span>
+                            </div>
+
+                            <!-- Photo / Avatar -->
+                            <div class="relative w-28 h-28 mx-auto mb-6">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-full opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
+                                <div class="relative w-full h-full rounded-full p-1 bg-white dark:bg-slate-900 ring-1 ring-gray-100 dark:ring-slate-800 group-hover:ring-transparent transition-all duration-300">
+                                    <img src="{{ asset( $expert->photo_url ? 'storage/' . $expert->photo_url : 'images/default-expert.png') }}" 
+                                         alt="{{ $expert->name }}"
+                                         class="w-full h-full rounded-full object-contain object-center transition-transform duration-300 group-hover:scale-[1.02]">
+                                </div>
+                            </div>
+
+                            <!-- Bio Information -->
+                            <div class="text-center">
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                                    {{ $expert->name }}
+                                </h3>
+                                <p class="text-sm font-medium text-gray-500 dark:text-slate-400 mt-1 mb-6">
+                                    {{ $expert->role }}
+                                </p>
+                            </div>
                         </div>
-                        <h2 class="text-xl font-bold text-blue-700 dark:text-blue-300 mb-1">{{ $expert->name }}</h2>
-                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">{{ $expert->role }}</div>
-                        <div class="text-xs text-gray-400 mb-4">{{ $expert->department }} department</div>
-                        <div class="flex justify-center gap-3 mb-4">
-                            <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition"><i class="fab fa-linkedin text-lg"></i></a>
-                            <a href="#" class="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white transition"><i class="fab fa-twitter text-lg"></i></a>
-                            <a href="#" class="text-pink-500 hover:text-pink-700 transition"><i class="fab fa-instagram text-lg"></i></a>
+
+                        <!-- Footer / Social Links -->
+                        <div class="flex justify-center items-center gap-5 pt-5 border-t border-gray-100 dark:border-slate-800/60">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors duration-200" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin text-lg"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-sky-500 dark:text-slate-500 dark:hover:text-sky-400 transition-colors duration-200" aria-label="Twitter">
+                                <i class="fab fa-twitter text-lg"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-pink-600 dark:text-slate-500 dark:hover:text-pink-400 transition-colors duration-200" aria-label="Instagram">
+                                <i class="fab fa-instagram text-lg"></i>
+                            </a>
                         </div>
-                        <div class="flex-1"></div>
-                        <div class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 dark:from-blue-900 dark:via-blue-700 dark:to-blue-900 opacity-60"></div>
+
                     </div>
                 @endforeach
             </div>

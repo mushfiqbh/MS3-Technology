@@ -11,90 +11,77 @@ $clients = \App\Models\Client::all();
                 MS3 Technology BD
             </a>
 
-            <div class="hidden lg:flex lg:items-center lg:gap-5">
-                <ul class="flex items-center flex-wrap">
-                    <li>
-                        <a class="nav-link" href="{{ url('/') }}">Home</a>
-                    </li>
+            <ul class="hidden md:flex items-center flex-wrap">
+                <li><a class="nav-link" href="{{ url('/') }}">Home</a></li>
 
-                    <li class="relative group">
-                        <a class="nav-link flex items-center cursor-pointer">
-                            About
-                            <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
-                                viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url('/experts') }}">Team</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/activities') }}">Activity</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/technology') }}">Technology</a></li>
-                            <li><a class="dropdown-item" href="{{ url('/partners') }}">Partners</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="relative group">
-                        <a class="nav-link flex items-center cursor-pointer">
-                            Solutions
-                            <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
-                                viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach ($solutions as $solution)
-                                <li><a class="dropdown-item"
-                                        href="{{ url('/solutions/' . $solution->slug) }}">{{ $solution->title }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="relative group">
-                        <a class="nav-link flex items-center cursor-pointer">
-                            Clients
-                            <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
-                                viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach ($clients as $client)
-                                <li><a class="dropdown-item"
-                                        href="{{ url('/clients/' . strtolower($client->category)) }}">{{ $client->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li><a class="nav-link" href="{{ url('/careers') }}">Career</a></li>
-                    <li><a class="nav-link" href="{{ url('/activities') }}">Blog</a></li>
-                    <li><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
-                </ul>
-
-                <div class="flex items-center gap-5 ml-4">
-                    <a style="padding: 0.5rem 1rem;"
-                        class="inline-flex items-center text-sm font-semibold text-blue-600 bg-white hover:bg-blue-600 hover:text-white transition-all duration-200"
-                        href="{{ url('/consultation') }}">
-                        <i class="fas fa-rocket mr-2"></i>
-                        Get Free Consultation
+                <li class="relative group">
+                    <a class="nav-link flex items-center cursor-pointer">
+                        About
+                        <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
                     </a>
-                    <button id="theme-switcher-desktop"
-                        class="text-2xl text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 p-2">
-                        <i id="theme-icon-desktop" class="fas fa-moon h-5 w-5"></i>
-                    </button>
-                </div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url('/about-us') }}">About Us</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/experts') }}">Team</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/activities') }}">Activity</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/partners') }}">Partners</a></li>
+                    </ul>
+                </li>
+
+                <li class="relative group">
+                    <a class="nav-link flex items-center cursor-pointer">
+                        Solutions
+                        <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach ($solutions as $solution)
+                            <li><a class="dropdown-item"
+                                    href="{{ url('/solutions/' . $solution->slug) }}">{{ $solution->title }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li class="relative group">
+                    <a class="nav-link flex items-center cursor-pointer">
+                        Clients
+                        <svg class="h-4 w-4 ml-1 transform transition-transform duration-200 group-hover:rotate-180"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach ($clients as $client)
+                            <li><a class="dropdown-item"
+                                    href="{{ url('/clients/' . strtolower($client->category)) }}">{{ $client->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+                <li><a class="nav-link" href="{{ url('/careers') }}">Career</a></li>
+                <li><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
+            </ul>            
+
+            <div class="hidden md:flex items-center gap-5 ml-4">
+                <a style="padding: 0.5rem 1rem;"
+                    class="inline-flex items-center text-sm font-semibold text-blue-600 bg-blue-100 hover:bg-blue-600 hover:text-white transition-all duration-200"
+                    href="{{ url('/consultation') }}">
+                    <i class="fas fa-rocket mr-2"></i>
+                    Get Consultation
+                </a>
             </div>
 
             <div class="flex items-center space-x-4 lg:hidden">
-                <button id="theme-switcher-mobile"
-                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 p-2">
-                    <i id="theme-icon-mobile" class="fas fa-moon h-5 w-5 scale-110"></i>
-                </button>
                 <button id="mobile-menu-button"
                     class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 p-2">
                     <span class="sr-only">Open main menu</span>
@@ -112,37 +99,19 @@ $clients = \App\Models\Client::all();
             <ul class="bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200 flex flex-col p-4 space-y-2 w-full">
                 <li>
                     <a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
-                        href="{{ url('/') }}">
-                        <i class="fas fa-home mr-3"></i>Home
+                        href="{{ url('/') }}">Home
+                    </a>
+                </li>
+                <li>
+                    <a class="mobile-nav-link block py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
+                        href="{{ url('/about-us') }}">About Us
                     </a>
                 </li>
                 <li class="relative">
                     <button
                         class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
-                        <span><i class="fas fa-info-circle mr-3"></i>About</span>
+                        <span>Solutions</span>
                         <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <ul class="mobile-dropdown-menu hidden mt-2 ml-4 space-y-1">
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/experts') }}">Team</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/activities') }}">Activity</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/technology') }}">Technology</a></li>
-                        <li><a class="mobile-dropdown-item block py-2 px-3 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-all duration-200"
-                                href="{{ url('/partners') }}">Partners</a></li>
-                    </ul>
-                </li>
-                <li class="relative">
-                    <button
-                        class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
-                        <span><i class="fas fa-cogs mr-3"></i>Solutions</span>
-                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20"
-                            fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                 clip-rule="evenodd" />
@@ -158,9 +127,8 @@ $clients = \App\Models\Client::all();
                 <li class="relative">
                     <button
                         class="mobile-dropdown-button w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 flex items-center justify-between">
-                        <span><i class="fas fa-users mr-3"></i>Clients</span>
-                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20"
-                            fill="currentColor">
+                        <span>Clients</span>
+                        <svg class="h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                 clip-rule="evenodd" />
@@ -191,29 +159,12 @@ $clients = \App\Models\Client::all();
 </nav>
 
 <script>
-    // Set initial theme based on local storage
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage))) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark');
-    }
+    // Set initial theme white
+    document.documentElement.classList.remove('dark');
 
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    const themeSwitcherDesktop = document.getElementById('theme-switcher-desktop');
-    const themeSwitcherMobile = document.getElementById('theme-switcher-mobile');
-    const themeIconDesktop = document.getElementById('theme-icon-desktop');
-    const themeIconMobile = document.getElementById('theme-icon-mobile');
-
-    function updateThemeIcon(isDark) {
-        themeIconDesktop.classList.toggle('fa-sun', !isDark);
-        themeIconDesktop.classList.toggle('fa-moon', isDark);
-        themeIconMobile.classList.toggle('fa-sun', !isDark);
-        themeIconMobile.classList.toggle('fa-moon', isDark);
-    }
-
-    updateThemeIcon(document.documentElement.classList.contains('dark'));
 
     function toggleMobileMenu() {
         mobileMenu.classList.toggle('-translate-x-full');
@@ -238,17 +189,8 @@ $clients = \App\Models\Client::all();
         event.currentTarget.querySelector('svg').classList.toggle('rotate-180');
     }
 
-    function toggleTheme() {
-
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateThemeIcon(isDark);
-    }
-
     mobileMenuButton.addEventListener('click', toggleMobileMenu);
     mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
-    themeSwitcherDesktop.addEventListener('click', toggleTheme);
-    themeSwitcherMobile.addEventListener('click', toggleTheme);
 
     // Add event listeners for mobile dropdown buttons
     document.querySelectorAll('.mobile-dropdown-button').forEach(button => {

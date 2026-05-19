@@ -7,6 +7,19 @@ use App\Http\Controllers\PublicPageController;
 
 
 // =============================================================================
+// AUTHENTICATION ROUTES
+// =============================================================================
+
+Route::controller(AuthController::class)->group(function () {
+    // Redirect /login
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+
+    // Logout Route
+    Route::post('/admin/logout', 'logout')->name('admin.logout');
+});
+
+
+// =============================================================================
 // PUBLIC ROUTES
 // =============================================================================
 
@@ -32,23 +45,6 @@ Route::get('/terms-of-service', [PublicPageController::class, 'termsOfService'])
 // Consultation
 Route::get('/consultation', [PublicPageController::class, 'showConsultationForm'])->name('consultation.form');
 Route::post('/consultation/submit', [PublicPageController::class, 'submitConsultation'])->name('consultation.submit');
-
-
-// =============================================================================
-// AUTHENTICATION ROUTES
-// =============================================================================
-
-Route::controller(AuthController::class)->group(function () {
-    // Login Routes
-    Route::get('/login', 'redirectToAdminLogin')->name('login'); // Laravel auth system compatibility
-    Route::get('/admin/login', 'showLoginForm')->name('admin.login');
-    Route::post('/admin/login', 'login')->name('admin.login.submit');
-
-    // Logout Route
-    Route::post('/admin/logout', 'logout')->name('admin.logout');
-});
-
-
 
 // =============================================================================
 // ADMIN ROUTES (Protected)
