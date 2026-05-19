@@ -4,7 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicPageController;
+use Illuminate\Support\Facades\Artisan;
 
+Route::get('/up', function () {
+    Artisan::call('migrate', [
+        '--force' => true,
+    ]);
+
+    Artisan::call('optimize:clear');
+
+    return 'Application is up and running!';
+});
 
 // =============================================================================
 // AUTHENTICATION ROUTES
