@@ -20,7 +20,7 @@
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <div class="flex items-center gap-2 text-blue-100">
                         <i class="fas fa-calendar-alt text-2xl"></i>
-                        <span class="text-lg font-semibold">Established 2020</span>
+                        <span class="text-lg font-semibold">Established 2017</span>
                     </div>
                     <div class="hidden sm:block w-px h-8 bg-blue-300"></div>
                     <div class="flex items-center gap-2 text-blue-100">
