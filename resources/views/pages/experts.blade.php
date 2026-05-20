@@ -41,15 +41,31 @@
 
                         <!-- Footer / Social Links -->
                         <div class="flex justify-center items-center gap-5 pt-5 border-t border-gray-100 dark:border-slate-800/60">
-                            <a href="#" class="text-gray-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors duration-200" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin text-lg"></i>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-sky-500 dark:text-slate-500 dark:hover:text-sky-400 transition-colors duration-200" aria-label="Twitter">
-                                <i class="fab fa-twitter text-lg"></i>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-pink-600 dark:text-slate-500 dark:hover:text-pink-400 transition-colors duration-200" aria-label="Instagram">
-                                <i class="fab fa-instagram text-lg"></i>
-                            </a>
+                            @if($expert->linkedin)
+                                <a href="{{ $expert->linkedin }}" target="_blank" class="text-gray-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 transition-colors duration-200" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin text-lg"></i>
+                                </a>
+                            @endif
+                            @if($expert->whatsapp)
+                                <a href="{{ str_starts_with($expert->whatsapp, 'http') ? $expert->whatsapp : 'https://wa.me/' . ltrim($expert->whatsapp, '+') }}" target="_blank" class="text-gray-400 hover:text-green-500 dark:text-slate-500 dark:hover:text-green-400 transition-colors duration-200" aria-label="WhatsApp">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                </a>
+                            @endif
+                            @if($expert->facebook)
+                                <a href="{{ $expert->facebook }}" target="_blank" class="text-gray-400 hover:text-blue-700 dark:text-slate-500 dark:hover:text-blue-600 transition-colors duration-200" aria-label="Facebook">
+                                    <i class="fab fa-facebook text-lg"></i>
+                                </a>
+                            @endif
+                            @if($expert->twitter)
+                                <a href="{{ $expert->twitter }}" target="_blank" class="text-gray-400 hover:text-sky-500 dark:text-slate-500 dark:hover:text-sky-400 transition-colors duration-200" aria-label="Twitter">
+                                    <i class="fab fa-twitter text-lg"></i>
+                                </a>
+                            @endif
+                            @if($expert->instagram)
+                                <a href="{{ $expert->instagram }}" target="_blank" class="text-gray-400 hover:text-pink-600 dark:text-slate-500 dark:hover:text-pink-400 transition-colors duration-200" aria-label="Instagram">
+                                    <i class="fab fa-instagram text-lg"></i>
+                                </a>
+                            @endif
                         </div>
 
                     </div>

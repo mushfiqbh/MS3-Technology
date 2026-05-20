@@ -75,6 +75,11 @@ class AdminController extends Controller
             'department' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
             'photo' => 'required|image|max:5120',
+            'linkedin' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -96,6 +101,11 @@ class AdminController extends Controller
             'department' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
             'photo' => 'nullable|image|max:5120',
+            'linkedin' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
         ]);
 
         if ($request->hasFile('photo')) {
