@@ -15,5 +15,10 @@ class Expert extends Model
         'department',
         'bio',
         'photo_url',
+        'linkedin',
+        'whatsapp',
+        'facebook',
+        'twitter',
+        'instagram',
     ];
 }

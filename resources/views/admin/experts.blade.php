@@ -57,6 +57,13 @@
                                             <i class="fas fa-user-circle mr-2"></i>{{ \Illuminate\Support\Str::limit($expert->bio, 100) }}
                                         </div>
                                         @endif
+                                        <div class="flex space-x-2 mt-2">
+                                            @if($expert->linkedin) <i class="fab fa-linkedin text-blue-600"></i> @endif
+                                            @if($expert->whatsapp) <i class="fab fa-whatsapp text-green-500"></i> @endif
+                                            @if($expert->facebook) <i class="fab fa-facebook text-blue-700"></i> @endif
+                                            @if($expert->twitter) <i class="fab fa-twitter text-sky-500"></i> @endif
+                                            @if($expert->instagram) <i class="fab fa-instagram text-pink-600"></i> @endif
+                                        </div>
                                         <div class="text-xs text-gray-500">📅 {{ \Carbon\Carbon::parse($expert->created_at)->format('M d, Y H:i') }}</div>
                                     </div>
                                 </td>
@@ -129,6 +136,13 @@
                                 {{ \Illuminate\Support\Str::limit($expert->bio, 80) }}
                             </div>
                             @endif
+                            <div class="flex space-x-3 mt-2">
+                                @if($expert->linkedin) <i class="fab fa-linkedin text-blue-600"></i> @endif
+                                @if($expert->whatsapp) <i class="fab fa-whatsapp text-green-500"></i> @endif
+                                @if($expert->facebook) <i class="fab fa-facebook text-blue-700"></i> @endif
+                                @if($expert->twitter) <i class="fab fa-twitter text-sky-500"></i> @endif
+                                @if($expert->instagram) <i class="fab fa-instagram text-pink-600"></i> @endif
+                            </div>
                             <div class="flex items-center text-xs text-gray-500 mt-2">
                                 <i class="fas fa-calendar w-4 mr-2"></i>
                                 {{ \Carbon\Carbon::parse($expert->created_at)->format('M d, Y H:i') }}
@@ -211,6 +225,61 @@
                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Biography</label>
                         <textarea id="form_bio" name="bio" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" placeholder="Brief description of expertise, achievements, and background..."></textarea>
                     </div>
+
+                    <!-- Social Media Links Section -->
+                    <div class="lg:col-span-2 mt-6">
+                        <h4 class="text-md font-bold text-blue-700 dark:text-blue-300 mb-4 flex items-center">
+                            <i class="fas fa-share-alt mr-2"></i> Social Media Links
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">LinkedIn Profile URL</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                                        <i class="fab fa-linkedin"></i>
+                                    </span>
+                                    <input type="url" id="form_linkedin" name="linkedin" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="https://linkedin.com/in/username">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">WhatsApp Number/Link</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </span>
+                                    <input type="text" id="form_whatsapp" name="whatsapp" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="+1234567890 or https://wa.me/...">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Facebook Profile URL</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                                        <i class="fab fa-facebook"></i>
+                                    </span>
+                                    <input type="url" id="form_facebook" name="facebook" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="https://facebook.com/username">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Twitter (X) Profile URL</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                                        <i class="fab fa-twitter"></i>
+                                    </span>
+                                    <input type="url" id="form_twitter" name="twitter" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="https://twitter.com/username">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Instagram Profile URL</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                                        <i class="fab fa-instagram"></i>
+                                    </span>
+                                    <input type="url" id="form_instagram" name="instagram" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500" placeholder="https://instagram.com/username">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="lg:col-span-2 space-y-2">
                         <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Profile Photo</label>
                         <div class="flex items-center space-x-4">
@@ -274,6 +343,11 @@
                 document.getElementById('form_department').value = expert.department || '';
                 document.getElementById('form_experience').value = expert.experience || '';
                 document.getElementById('form_bio').value = expert.bio || '';
+                document.getElementById('form_linkedin').value = expert.linkedin || '';
+                document.getElementById('form_whatsapp').value = expert.whatsapp || '';
+                document.getElementById('form_facebook').value = expert.facebook || '';
+                document.getElementById('form_twitter').value = expert.twitter || '';
+                document.getElementById('form_instagram').value = expert.instagram || '';
                 
                 // Show existing photo if available
                 if (expert.photo) {
@@ -301,6 +375,11 @@
             document.getElementById('form_department').value = '';
             document.getElementById('form_experience').value = '';
             document.getElementById('form_bio').value = '';
+            document.getElementById('form_linkedin').value = '';
+            document.getElementById('form_whatsapp').value = '';
+            document.getElementById('form_facebook').value = '';
+            document.getElementById('form_twitter').value = '';
+            document.getElementById('form_instagram').value = '';
             document.getElementById('form_photo').value = '';
             hidePhotoPreview();
         }

@@ -13,7 +13,7 @@ Route::get('/up', function () {
 
     Artisan::call('optimize:clear');
 
-    return 'Application is up and running!';
+    return redirect('/');
 });
 
 // =============================================================================
