@@ -472,4 +472,85 @@ class AdminController extends Controller
 
         return back()->with('success', 'Activity deleted successfully!');
     }
+
+
+
+
+
+    // ============================ APP UPDATE MANAGEMENT ============================
+
+    /**
+     * Show the App Update management page.
+     *
+     * Reads current version info from the settings table so the admin
+     * can upload a new APK and update the version details.
+     */
+    public function appUpdate()
+    {
+        $versionCode = DB::table('settings')->where('key', 'app_version_code')->value('value') ?? config('app-update.version_code');
+        $versionName = DB::table('settings')->where('key', 'app_version_name')->value('value') ?? config('app-update.version_name');
+        $changelog = DB::table('settings')->where('key', 'app_changelog')->value('value') ?? config('app-update.changelog');
+        $apkPath = DB::table('settings')->where('key', 'app_apk_path')->value('value') ?? config('app-update.apk_path');
+
+        $apkExists = $apkPath && file_exists(storage_path('app/private/' . $apkPath));
+
+        return view('admin.app-update', compact('versionCode', 'versionName', 'changelog', 'apkPath', 'apkExists'));
+    }
+
+    /**
+     * Handle APK upload and version update.
+     *
+     * Saves the uploaded APK to private storage, updates the version
+     * info (version_code, version_name, changelog) in the settings table,
+     * and cleans up the old APK file if one existed.
+     */
+    public function updateAppUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            'version_code' => 'required|integer|min:1',
+            'version_name' => 'required|string|max:50',
+            'changelog' => 'nullable|string|max:5000',
+            'apk' => 'nullable|file|mimes:apk|max:204800', // 200MB max
+        ]);
+
+        // Save version metadata to settings table
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'app_version_code'],
+            ['value' => $validated['version_code']]
+        );
+
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'app_version_name'],
+            ['value' => $validated['version_name']]
+        );
+
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'app_changelog'],
+            ['value' => $validated['changelog'] ?? '']
+        );
+
+        // Handle APK file upload
+        if ($request->hasFile('apk')) {
+            // Delete old APK if exists
+            $oldPath = DB::table('settings')->where('key', 'app_apk_path')->value('value');
+            if ($oldPath) {
+                $oldFullPath = storage_path('app/private/' . $oldPath);
+                if (file_exists($oldFullPath)) {
+                    unlink($oldFullPath);
+                }
+            }
+
+            // Store new APK
+            $file = $request->file('apk');
+            $filename = 'app-release-' . time() . '.apk';
+            $filePath = $file->storeAs('updates', $filename, 'local');
+
+            DB::table('settings')->updateOrInsert(
+                ['key' => 'app_apk_path'],
+                ['value' => $filePath]
+            );
+        }
+
+        return back()->with('success', 'App update published successfully!');
+    }
 };

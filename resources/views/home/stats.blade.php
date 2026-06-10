@@ -1,5 +1,6 @@
-<section class="pb-16 w-full bg-white dark:bg-gray-900">
-    <div class="relative bg-black p-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-center overflow-hidden">
+<section class="mb-16 w-full bg-transparent">
+    <div class="relative bg-linear-to-br from-zinc-950 via-zinc-900 to-zinc-950
+ p-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-center overflow-hidden">
         @foreach ($stats as $stat)
             <div>
                 <div class="text-4xl md:text-5xl font-extrabold text-white mb-2">
