@@ -42,9 +42,9 @@ class PublicPageController extends Controller
         ];
 
         $stats = [
-            ['label' => 'Happy Clients', 'value' => 150],
-            ['label' => 'Completed Projects', 'value' => 320],
-            ['label' => 'Employees', 'value' => 75],
+            ['label' => 'Happy Clients', 'value' => 200],
+            ['label' => 'Completed Projects', 'value' => 450],
+            ['label' => 'Employees', 'value' => 20],
             ['label' => 'Awards', 'value' => 25],
             ['label' => 'Partners', 'value' => 40],
         ];

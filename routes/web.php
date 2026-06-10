@@ -120,4 +120,8 @@ Route::prefix('admin')
             Route::put('/{id}', 'updateConsultation')->name('update');
             Route::delete('/{id}', 'deleteConsultation')->name('delete');
         });
+
+        // App Update Management
+        Route::get('/app-update', 'appUpdate')->name('app-update.index');
+        Route::post('/app-update', 'updateAppUpdate')->name('app-update.update');
     });
